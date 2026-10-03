@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { baseUrl } from '../constants/movie'
-import { Movie } from '../typings'
+import { baseUrl } from '../../constants/movie'
+import { Movie } from '../../typings'
 import { FaPlay } from 'react-icons/fa'
 import { InformationCircleIcon } from '@heroicons/react/24/solid'
 
@@ -14,10 +14,14 @@ function Banner({ netflixOriginals }: Props) {
   const [movie, setMovie] = useState<Movie | null>(null)
 
   useEffect(() => {
-    setMovie(
-      netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)]
-    )
-  }, [netflixOriginals])
+  if (!netflixOriginals || netflixOriginals.length === 0) return;
+
+  setMovie(
+    netflixOriginals[
+      Math.floor(Math.random() * netflixOriginals.length)
+    ]
+  );
+}, [netflixOriginals]);
 
   return (
     <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12">
