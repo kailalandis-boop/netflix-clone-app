@@ -4,7 +4,7 @@ import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
-export default function Header() {
+function Header() {
 const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -55,3 +55,5 @@ const [isScrolled, setIsScrolled] = useState(false)
     </header>
   )
 }
+
+export default Header;
