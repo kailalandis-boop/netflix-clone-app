@@ -1,8 +1,8 @@
 'use client'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { DocumentData } from 'firebase/firestore'
+import type { DocumentData } from 'firebase/firestore'
+import type { Movie } from '../../typings'
 import { useRef, useState } from 'react'
-import { Movie } from '../../typings'
 import Thumbnail from './Thumbnail'
 
 interface Props {
