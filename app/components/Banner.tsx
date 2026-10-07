@@ -35,6 +35,7 @@ function Banner({ netflixOriginals }: Props) {
             alt=""
         />
         )}
+        <div className="absolute bottom-0 left-0 h-40 w-full banner-fade" />
       </div>
       <h1 className="text-2xl font-bold md:text-4xl lg:text-7xl">
         {movie?.title || movie?.name || movie?.original_name}

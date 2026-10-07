@@ -14,6 +14,7 @@ const [isScrolled, setIsScrolled] = useState(false)
       } else {
         setIsScrolled(false)
       }
+      console.log(window.scrollY)
     }
 
     window.addEventListener('scroll', handleScroll)
