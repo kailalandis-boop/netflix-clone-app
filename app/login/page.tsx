@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useAuth } from '../hooks/useAuth'
+import useAuth from '../hooks/useAuth'
 
 interface Inputs {
   email: string
@@ -12,7 +12,7 @@ interface Inputs {
 function LoginPage() {
   const [login, setLogin] = useState(false);
   const { signIn, signUp } = useAuth()
-  
+
   const {
     register,
     handleSubmit,

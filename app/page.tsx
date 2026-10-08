@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Banner from "./components/Banner";
 import { Movie } from "@/typings";
 import Row from "./components/Row";
+import useAuth from "./hooks/useAuth";
 
 export const metadata: Metadata = {
   title: "Let's Build Netflix Clone with Next.js 13, Tailwind CSS, and TypeScript",

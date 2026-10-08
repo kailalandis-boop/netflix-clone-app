@@ -3,7 +3,7 @@
 import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { useAuth } from '../hooks/useAuth'
+import useAuth from '../hooks/useAuth'
 
 function Header() {
 const [isScrolled, setIsScrolled] = useState(false)
