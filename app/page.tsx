@@ -1,24 +1,10 @@
 import requests from "../utils/requests";
 import { Metadata } from 'next'
-import Header from "./components/Header";
-import Banner from "./components/Banner";
 import { Movie } from "@/typings";
-import Row from "./components/Row";
-import useAuth from "./hooks/useAuth";
+import HomeClient from "./components/HomeClient";
 
 export const metadata: Metadata = {
   title: "Let's Build Netflix Clone with Next.js 13, Tailwind CSS, and TypeScript",
-}
-
-interface Props {
-  netflixOriginals: Movie[]
-  trendingNow: Movie[]
-  topRated: Movie[]
-  actionMovies: Movie[]
-  comedyMovies: Movie[]
-  horrorMovies: Movie[]
-  romanceMovies: Movie[]
-  documentaries: Movie[]
 }
 
 export default async function Home() {
@@ -59,22 +45,15 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="relative h-screen bg-linear-to-b lg:h-[140vh]">
-      <Header />
-      <main className="relative isolate pl-4 pb-24 lg:space-y-24 lg:pl-16">
-        <Banner netflixOriginals={netflixOriginals} />
-        <section className="md:space-y-24">
-          <Row title="Trending Now" movies={trendingNow} />
-          <Row title="Top Rated" movies={topRated} />
-          <Row title="Action Thrillers" movies={actionMovies} />
-          {/* My List Component */}
-          <Row title="Comedies" movies={comedyMovies} />
-          <Row title="Scary Movies" movies={horrorMovies} />
-          <Row title="Romance Movies" movies={romanceMovies} />
-          <Row title="Documentaries" movies={documentaries} />
-        </section>
-      </main>
-      {/* Modal */}
-    </div>
+    <HomeClient
+      netflixOriginals={netflixOriginals}
+      trendingNow={trendingNow}
+      topRated={topRated}
+      actionMovies={actionMovies}
+      comedyMovies={comedyMovies}
+      horrorMovies={horrorMovies}
+      romanceMovies={romanceMovies}
+      documentaries={documentaries}
+    />
   );
 }
