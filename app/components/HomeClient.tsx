@@ -36,7 +36,10 @@ const HomeClient = ({
   if (loading) return null
 
   return (
-    <div className="relative h-screen bg-linear-to-b lg:h-[140vh]">
+    <div className="{`relative h-screen bg-linear-to-b lg:h-[140vh]`} 
+        ${showModal && 'h-screen! overflow-hidden'
+      }"
+    >
       <Header />
       <main className="relative isolate pl-4 pb-24 lg:space-y-24 lg:pl-16">
         <Banner netflixOriginals={netflixOriginals} />
