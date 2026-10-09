@@ -20,15 +20,15 @@ import { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { FaPlay } from 'react-icons/fa'
 import ReactPlayer from 'react-player'
-import { useRecoilState } from 'recoil'
 import { modalState, movieState } from '@/atoms/modalAtom'
 import { db } from '@/firebase'
 import useAuth from '../hooks/useAuth'
 import { Element, Genre, Movie } from '../../typings'
+import { useAtom } from 'jotai';
 
 function Modal() {
-  const [showModal, setShowModal] = useRecoilState(modalState)
-  const [movie, setMovie] = useRecoilState(movieState)
+  const [showModal, setShowModal] = useAtom(modalState)
+  const [movie, setMovie] = useAtom(movieState)
   const [trailer, setTrailer] = useState('')
   const [genres, setGenres] = useState<Genre[]>([])
   const [muted, setMuted] = useState(true)
@@ -145,7 +145,7 @@ function Modal() {
 
         <div className="relative pt-[56.25%]">
           <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${trailer}`}
+            src={`https://www.youtube.com/watch?v=${trailer}`}
             width="100%"
             height="100%"
             style={{ position: 'absolute', top: '0', left: '0' }}

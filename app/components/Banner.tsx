@@ -5,9 +5,9 @@ import { baseUrl } from '../../constants/movie'
 import { Movie } from '../../typings'
 import { FaPlay } from 'react-icons/fa'
 import { InformationCircleIcon } from '@heroicons/react/24/solid'
-import { useRecoilState } from 'recoil'
 import { modalState } from '@/atoms/modalAtom'
 import { movieState } from '@/atoms/modalAtom'
+import { useAtom } from 'jotai/react'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -15,8 +15,8 @@ interface Props {
 
 function Banner({ netflixOriginals }: Props) {
   const [movie, setMovie] = useState<Movie | null>(null)
-  const [showModal, setShowModal] = useRecoilState(modalState)
-  const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+  const [showModal, setShowModal] = useAtom(modalState)
+  const [currentMovie, setCurrentMovie] = useAtom(movieState)
 
   useEffect(() => {
   if (!netflixOriginals || netflixOriginals.length === 0) return;

@@ -5,9 +5,9 @@ import Banner from "./Banner";
 import Row from "./Row";
 import useAuth from "../hooks/useAuth";
 import { Movie } from "@/typings";
-import { useRecoilValue, RecoilRoot } from "recoil";
 import { modalState } from "@/atoms/modalAtom";
 import Modal from "./Modal";
+import { useAtomValue } from "jotai/react";
 
 
 interface Props {
@@ -31,7 +31,7 @@ const HomeClient = ({
   trendingNow,
 }: Props) => {
   const { loading } = useAuth()
-  const showModal = useRecoilValue(modalState)
+  const showModal = useAtomValue(modalState)
 
   if (loading) return null
 

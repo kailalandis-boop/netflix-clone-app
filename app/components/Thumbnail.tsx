@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import { Movie } from '../../typings'
 import { modalState, movieState } from '@/atoms/modalAtom'
-import { useRecoilState } from 'recoil'
 import { DocumentData } from 'firebase/firestore'
+import { useAtom } from 'jotai'
 
 interface Props {
   movie: Movie | DocumentData
 }
 
 function Thumbnail({ movie }: Props) {
-const [showModal, setShowModal] = useRecoilState(modalState)
-const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+const [showModal, setShowModal] = useAtom(modalState)
+const [currentMovie, setCurrentMovie] = useAtom(movieState)
 
   return (
     <div

@@ -1,13 +1,7 @@
-import { DocumentData } from 'firebase/firestore'
-import { atom } from 'recoil'
-import { Movie } from '../typings'
+import { atom } from 'jotai'
+import type { DocumentData } from 'firebase/firestore'
+import type { Movie } from '../typings'
 
-export const modalState = atom({
-  key: 'modalState',
-  default: false,
-})
+export const modalState = atom(false)
 
-export const movieState = atom<Movie | DocumentData | null>({
-  key: 'movieState',
-  default: null,
-})
+export const movieState = atom<Movie | DocumentData | null>(null)
