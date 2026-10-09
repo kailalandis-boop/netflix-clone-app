@@ -144,14 +144,20 @@ function Modal() {
         </button>
 
         <div className="relative pt-[56.25%]">
-          <ReactPlayer
-            src={`https://www.youtube.com/watch?v=${trailer}`}
-            width="100%"
-            height="100%"
-            style={{ position: 'absolute', top: '0', left: '0' }}
+          {trailer && (
+            <ReactPlayer
+              src={`https://www.youtube.com/watch?v=${trailer}`}
+              width="100%"
+              height="100%"
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+              }}
             playing
             muted={muted}
-          />
+            />
+          )}
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
               <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
