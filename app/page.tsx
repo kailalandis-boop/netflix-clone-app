@@ -4,7 +4,7 @@ import { Movie } from "@/typings";
 import HomeClient from "./components/HomeClient";
 
 export const metadata: Metadata = {
-  title: "Let's Build Netflix Clone with Next.js 13, Tailwind CSS, and TypeScript",
+  title: "Netflix",
 }
 
 export default async function Home() {

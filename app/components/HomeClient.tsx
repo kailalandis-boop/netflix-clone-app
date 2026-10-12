@@ -8,6 +8,7 @@ import { Movie } from "@/typings";
 import { modalState } from "@/atoms/modalAtom";
 import Modal from "./Modal";
 import { useAtomValue } from "jotai/react";
+import Plans from "./Plans";
 
 
 interface Props {
@@ -32,8 +33,11 @@ const HomeClient = ({
 }: Props) => {
   const { loading } = useAuth()
   const showModal = useAtomValue(modalState)
+  const subscription = false // Replace with your subscription logic
 
-  if (loading) return null
+  if (loading || subscription === null) return null
+
+  if (!subscription) return <Plans products={[]} /> // products={products} />
 
   return (
     <div className="{`relative h-screen bg-linear-to-b lg:h-[140vh]`} 
