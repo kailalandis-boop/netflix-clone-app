@@ -2,10 +2,20 @@ import requests from "../utils/requests";
 import { Metadata } from 'next'
 import { Movie } from "@/typings";
 import HomeClient from "./components/HomeClient";
+import { getProducts } from "@invertase/firestore-stripe-payments";
+import payments from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Netflix",
 }
+
+const products = await getProducts(payments, {
+  includePrices: true,
+  activeOnly: true,
+})
+  .then((res) => res)
+  .catch((error) => console.log(error.message))
+
 
 export default async function Home() {
   const [

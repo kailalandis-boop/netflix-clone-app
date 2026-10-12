@@ -1,5 +1,5 @@
 import { CheckIcon } from '@heroicons/react/24/solid'
-// import { Product } from '@stripe/firestore-stripe-payments'
+import { Product } from '@invertase/firestore-stripe-payments'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
