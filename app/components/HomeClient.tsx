@@ -9,8 +9,8 @@ import { modalState } from "@/atoms/modalAtom";
 import Modal from "./Modal";
 import { useAtomValue } from "jotai/react";
 import Plans from "./Plans";
+import { getProducts, Product } from "@invertase/firestore-stripe-payments";
 import payments from "@/lib/stripe";
-import { getProducts } from "@invertase/firestore-stripe-payments";
 
 const products = await getProducts(payments, {
   includePrices: true,
@@ -18,7 +18,7 @@ const products = await getProducts(payments, {
 })
   .then((res) => res)
   .catch((error) => console.log(error.message))
-  
+
 interface Props {
   netflixOriginals: Movie[]
   trendingNow: Movie[]
@@ -28,7 +28,9 @@ interface Props {
   horrorMovies: Movie[]
   romanceMovies: Movie[]
   documentaries: Movie[]
+  products: Product[]
 }
+
 const HomeClient = ({
   netflixOriginals,
   actionMovies,
@@ -38,7 +40,6 @@ const HomeClient = ({
   romanceMovies,
   topRated,
   trendingNow,
-  products,
 }: Props) => {
   const { loading } = useAuth()
   const showModal = useAtomValue(modalState)
@@ -46,7 +47,7 @@ const HomeClient = ({
 
   if (loading || subscription === null) return null
 
-  if (!subscription) return <Plans products={[]} /> // products={products} />
+  if (!subscription) return <Plans products={products} />
 
   return (
     <div className="{`relative h-screen bg-linear-to-b lg:h-[140vh]`} 

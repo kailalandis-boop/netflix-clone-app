@@ -1,12 +1,12 @@
-import { CheckIcon } from '@heroicons/react/24/solid'
+import { CheckIcon } from '@heroicons/react/24/outline'
 import { Product } from '@invertase/firestore-stripe-payments'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
+import Table from './Table'
 // import { loadCheckout } from '../lib/stripe'
 // import Loader from './Loader'
-// import Table from './Table'
 
 interface Props {
   products: Product[]
@@ -14,7 +14,7 @@ interface Props {
 
 function Plans({ products }: Props) {
     const { logout, user } = useAuth()
-//  const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
+    const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
 //  const [isBillingLoading, setBillingLoading] = useState(false)
 
 //   const subscribeToPlan = () => {
@@ -68,7 +68,7 @@ function Plans({ products }: Props) {
 
         <div className="mt-4 flex flex-col space-y-4">
           <div className="flex w-full items-center justify-center self-end md:w-3/5">
-            {/* {products.map((product) => (
+            {products.map((product) => (
               <div
                 key={product.id}
                 className={`planBox ${
@@ -78,10 +78,9 @@ function Plans({ products }: Props) {
               >
                 {product.name}
               </div>
-            ))} */}
+            ))}
           </div>
-
-          {/* <Table products={products} selectedPlan={selectedPlan} /> */}
+          <Table products={products} selectedPlan={selectedPlan} />
 
           {/* <button
             disabled={!selectedPlan || isBillingLoading}
