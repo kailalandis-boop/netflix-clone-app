@@ -14,15 +14,6 @@ import payments from "@/lib/stripe";
 import useSubscription from "../hooks/useSubscription";
 import { useEffect, useState } from "react";
 
-const [products, setProducts] = useState<Product[]>([])
-
-useEffect(() => {
-  getProducts(payments, {
-    includePrices: true,
-    activeOnly: true,
-  }).then(setProducts)
-}, [])
-
 interface Props {
   netflixOriginals: Movie[]
   trendingNow: Movie[]
@@ -48,10 +39,24 @@ const HomeClient = ({
   const { loading, user } = useAuth()
   const showModal = useAtomValue(modalState)
   const subscription = useSubscription(user)
+  const [products, setProducts] = useState<Product[]>([])
+
+useEffect(() => {
+  getProducts(payments, {
+    includePrices: true,
+    activeOnly: true,
+  }).then(setProducts)
+}, [])
 
   if (loading || subscription === null) return null
 
-  if (!subscription) return <Plans products={products} />
+  if (!subscription) {
+  if (products.length === 0) {
+    return <div>Loading plans...</div>
+  }
+
+  return <Plans products={products} />
+}
 
   return (
     <div
