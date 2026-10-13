@@ -33,8 +33,10 @@ export default function BasicMenu() {
         open={open}
         onClose={handleClose}
         className="menu"
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
+        slotProps={{
+          list: {
+            'aria-labelledby': 'basic-button',
+          },
         }}
       >
         <MenuItem onClick={handleClose}>Home</MenuItem>

@@ -5,7 +5,7 @@ import Banner from "./Banner";
 import Row from "./Row";
 import useAuth from "../hooks/useAuth";
 import { Movie } from "@/typings";
-import { modalState } from "@/atoms/modalAtom";
+import { modalState, movieState } from "@/atoms/modalAtom";
 import Modal from "./Modal";
 import { useAtomValue } from "jotai/react";
 import Plans from "./Plans";
@@ -13,6 +13,7 @@ import { getProducts, Product } from "@invertase/firestore-stripe-payments";
 import payments from "@/lib/stripe";
 import useSubscription from "../hooks/useSubscription";
 import { useEffect, useState } from "react";
+import useList from "../hooks/useList";
 
 interface Props {
   netflixOriginals: Movie[]
@@ -40,6 +41,8 @@ const HomeClient = ({
   const showModal = useAtomValue(modalState)
   const subscription = useSubscription(user)
   const [products, setProducts] = useState<Product[]>([])
+  const movie = useAtomValue(movieState)
+  const list = useList(user?.uid)
 
 useEffect(() => {
   getProducts(payments, {
@@ -72,7 +75,7 @@ useEffect(() => {
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
           {/* My List Component */}
-          <Row title="My List" movies={[]} />
+          {list.length > 0 && <Row title="My List" movies={list} />}
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />

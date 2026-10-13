@@ -12,7 +12,7 @@ function useSubscription(user: User | null) {
   useEffect(() => {
     if (!user) return
 
-    onCurrentUserSubscriptionUpdate(payments, (snapshot) => {
+    return onCurrentUserSubscriptionUpdate(payments, (snapshot) => {
       setSubscription(
         snapshot.subscriptions.filter(
           (subscription) =>
