@@ -49,7 +49,6 @@ const { logout } = useAuth()
             <BellIcon className="h-6 w-6" />
             <Link href="/account">
                 <img
-                onClick={logout}
                 src="https://rb.gy/g1pwyx"
                 alt=""
                 className="cursor-pointer rounded"

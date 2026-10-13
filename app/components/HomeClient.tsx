@@ -12,13 +12,16 @@ import Plans from "./Plans";
 import { getProducts, Product } from "@invertase/firestore-stripe-payments";
 import payments from "@/lib/stripe";
 import useSubscription from "../hooks/useSubscription";
+import { useEffect, useState } from "react";
 
-const products = await getProducts(payments, {
-  includePrices: true,
-  activeOnly: true,
-})
-  .then((res) => res)
-  .catch((error) => console.log(error.message))
+const [products, setProducts] = useState<Product[]>([])
+
+useEffect(() => {
+  getProducts(payments, {
+    includePrices: true,
+    activeOnly: true,
+  }).then(setProducts)
+}, [])
 
 interface Props {
   netflixOriginals: Movie[]
@@ -51,9 +54,10 @@ const HomeClient = ({
   if (!subscription) return <Plans products={products} />
 
   return (
-    <div className="{`relative h-screen bg-linear-to-b lg:h-[140vh]`} 
-        ${showModal && 'h-screen! overflow-hidden'
-      }"
+    <div
+      className={`relative h-screen bg-linear-to-b lg:h-[140vh] ${
+        showModal && 'h-screen! overflow-hidden'
+      }`}
     >
       <Header />
       <main className="relative isolate pl-4 pb-24 lg:space-y-24 lg:pl-16">
