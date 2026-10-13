@@ -74,15 +74,19 @@ function Modal() {
     fetchMovie()
   }, [movie])
 
-  // Find all the movies in the user's list
+ // Find all the movies in the user's list
   useEffect(() => {
-    if (user) {
-      return onSnapshot(
-        collection(db, 'customers', user.uid, 'myList'),
-        (snapshot) => setMovies(snapshot.docs)
-      )
+    if (!user) return
+    const unsubscribe = onSnapshot(
+    collection(db, 'customers', user.uid, 'myList'),
+    (snapshot) => setMovies(snapshot.docs),
+    (error) => {
+    // log the permission error so it's easier to debug in the console
+    console.error('Firestore onSnapshot error:', error)
     }
-  }, [db, movie?.id])
+    )
+    return unsubscribe
+    }, [db, movie?.id, user])
 
   // Check if the movie is already in the user's list
   useEffect(
