@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import Table from './Table'
-// import { loadCheckout } from '../lib/stripe'
-// import Loader from './Loader'
+import Loader from './Loader'
+import { loadCheckout } from '@/lib/stripe'
 
 interface Props {
   products: Product[]
@@ -15,14 +15,14 @@ interface Props {
 function Plans({ products }: Props) {
     const { logout, user } = useAuth()
     const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
-//  const [isBillingLoading, setBillingLoading] = useState(false)
+    const [isBillingLoading, setBillingLoading] = useState(false)
 
-//   const subscribeToPlan = () => {
-//     if (!user) return
+    const subscribeToPlan = () => {
+        if (!user) return
 
-//     loadCheckout(selectedPlan?.prices[0].id!)
-//     setBillingLoading(true)
-//   }
+        loadCheckout(selectedPlan?.prices[0].id!)
+        setBillingLoading(true)
+    }
 
   return (
     <div>
@@ -65,7 +65,6 @@ function Plans({ products }: Props) {
             your plan anytime.
           </li>
         </ul>
-
         <div className="mt-4 flex flex-col space-y-4">
           <div className="flex w-full items-center justify-center self-end md:w-3/5">
             {products.map((product) => (
@@ -81,10 +80,9 @@ function Plans({ products }: Props) {
             ))}
           </div>
           <Table products={products} selectedPlan={selectedPlan} />
-
-          {/* <button
+          <button
             disabled={!selectedPlan || isBillingLoading}
-            className={`mx-auto w-11/12 rounded bg-[#E50914] py-4 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
+            className={`mx-auto w-11/12 rounded bg-[#E50914] py-4 text-xl shadow hover:bg-[#f6121d] md:w-105 ${
               isBillingLoading && 'opacity-60'
             }`}
             onClick={subscribeToPlan}
@@ -94,7 +92,7 @@ function Plans({ products }: Props) {
             ) : (
               'Subscribe'
             )}
-          </button> */}
+          </button>
         </div>
       </main>
     </div>

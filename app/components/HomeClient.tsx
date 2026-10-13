@@ -11,6 +11,7 @@ import { useAtomValue } from "jotai/react";
 import Plans from "./Plans";
 import { getProducts, Product } from "@invertase/firestore-stripe-payments";
 import payments from "@/lib/stripe";
+import useSubscription from "../hooks/useSubscription";
 
 const products = await getProducts(payments, {
   includePrices: true,
@@ -41,9 +42,9 @@ const HomeClient = ({
   topRated,
   trendingNow,
 }: Props) => {
-  const { loading } = useAuth()
+  const { loading, user } = useAuth()
   const showModal = useAtomValue(modalState)
-  const subscription = false // Replace with your subscription logic
+  const subscription = useSubscription(user)
 
   if (loading || subscription === null) return null
 
