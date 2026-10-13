@@ -4,7 +4,7 @@ import { Movie } from "@/typings";
 import HomeClient from "./components/HomeClient";
 
 export const metadata: Metadata = {
-  title: "Netflix",
+  title: "Netflix - Home",
 }
 
 export default async function Home() {

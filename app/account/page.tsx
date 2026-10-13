@@ -1,28 +1,30 @@
+"use client" 
 import { getProducts, Product } from '@invertase/firestore-stripe-payments'
-import { GetStaticProps } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
-import payments from '../lib/stripe'
+import payments from '@/lib/stripe'
 import useSubscription from '@/app/hooks/useSubscription'
 import useAuth from '@/app/hooks/useAuth'
 import Membership from '@/app/components/Membership'
+import { useEffect, useState } from 'react'
 
-interface Props {
-  products: Product[]
-}
-
-function AccountPage({ products }: Props) {
-  console.log(products)
+function AccountPage(){
   const { user, logout } = useAuth()
   const subscription = useSubscription(user)
 
+  const [products, setProducts] = useState<Product[]>([])
+  console.log(products)
+
+  useEffect(() => {
+    getProducts(payments, {
+      includePrices: true,
+      activeOnly: true,
+  })
+      .then(setProducts)
+      .catch(console.error)
+}, [])
+
   return (
     <div>
-      <Head>
-        <title>Account Settings - Netflix</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <header className={`bg-[#141414]`}>
         <Link href="/">
           <img
@@ -40,7 +42,6 @@ function AccountPage({ products }: Props) {
           />
         </Link>
       </header>
-
       <main className="mx-auto max-w-6xl px-5 pt-24 pb-12 transition-all md:px-10">
         <div className="flex flex-col gap-x-4 md:flex-row md:items-center">
           <h1 className="text-3xl md:text-4xl">Account</h1>
@@ -51,9 +52,7 @@ function AccountPage({ products }: Props) {
             </p>
           </div>
         </div>
-
         <Membership />
-
         <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
           <h4 className="text-lg text-[gray]">Plan Details</h4>
           {/* Find the current plan */}
@@ -68,7 +67,6 @@ function AccountPage({ products }: Props) {
             Change plan
           </p>
         </div>
-
         <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0">
           <h4 className="text-lg text-[gray]">Settings</h4>
           <p
@@ -84,18 +82,3 @@ function AccountPage({ products }: Props) {
 }
 
 export default AccountPage
-
-export const getStaticProps: GetStaticProps = async () => {
-  const products = await getProducts(payments, {
-    includePrices: true,
-    activeOnly: true,
-  })
-    .then((res) => res)
-    .catch((error) => console.log(error.message))
-
-  return {
-    props: {
-      products,
-    },
-  }
-}
